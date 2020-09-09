@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"os"
 	"path/filepath"
 	"../../internal/email"
@@ -24,8 +24,9 @@ func ProcessFilepath(args []string) []string {
 // Takes in a path which contains a path to a email message file to open.
 func ProcessFile(filepath string) {
 	filedata, _ := os.Open(filepath)
-	message := email.ProcessEmail(filedata)
-	fmt.Println(message)
+	//message := email.ProcessEmail(filedata)
+    email.ProcessEmail(filedata)
+	//fmt.Println(message)
 }
 
 // main function
