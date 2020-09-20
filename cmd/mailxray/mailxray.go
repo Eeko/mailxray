@@ -1,10 +1,12 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"os"
 	"path/filepath"
 	"../../internal/email"
+	"encoding/json"
+	//"../../internal/finding"
 )
 
 // ProcessFilepath is a function to read a string from args and convert it to 
@@ -25,7 +27,9 @@ func ProcessFilepath(args []string) []string {
 func ProcessFile(filepath string) {
 	filedata, _ := os.Open(filepath)
 	//message := email.ProcessEmail(filedata)
-    email.ProcessEmail(filedata)
+	processed_email := email.ProcessEmail(filedata)
+	json_output, _ := json.Marshal(processed_email)
+    fmt.Println(string(json_output))
 	//fmt.Println(message)
 }
 

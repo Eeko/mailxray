@@ -22,10 +22,10 @@ func ProcessDate(header, value string) ([]finding.Finding) {
 	if parsedDate.After(currentTime) {
 		findings = append(findings, finding.Finding{Message: "Parsed Date is after current date", Location: [2]int{0, len(value)}, Severity: 4})
 	}
-	/**
+	
 	if parsedDate.Before(currentTime) {
-		findings = append(findings, finding.Finding{Message: "Parsed Date is before current date. This is fine.", Location: [2]int{0, len(value)}, Severity: 4})		
+		findings = append(findings, finding.Finding{Message: "Parsed Date is before current date. This is fine and purely informational for testing purposes.", Location: [2]int{0, len(value)}, Severity: 0})		
 	}
-	**/
+	
 	return findings
 }

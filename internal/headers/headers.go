@@ -1,7 +1,7 @@
 package headers
 
 import (
-	"fmt"
+	//"fmt"
 	"net/mail"
 	"strings"
 	//"./date"
@@ -11,18 +11,22 @@ import (
 // ProcessHeaders will (eventually) send every header it knows how to evaluate 
 // for their individual processors. Returns the header labels
 // of any header that won't get processed.
-func ProcessHeaders(headers mail.Header) {
-	
+func ProcessHeaders(headers mail.Header ) ([]finding.HeaderFindings) {
+	var header_findings []finding.HeaderFindings
 	for header, value := range headers {
 		var findings []finding.Finding
 		switch strings.ToLower(header) {
 		case "date":
 			findings = ProcessDate(header, value[0])
-			fmt.Println("Date (processed) :", findings)
+			header_findings = append(header_findings, finding.HeaderFindings{
+				HeaderName: "Date", 
+				Findings: findings,
+			})
+			//fmt.Println("Date (processed) :", findings)
 		default:
-			fmt.Println(header, "(not processed) :", value)
+			//fmt.Println(header, "(not processed) :", value)
 		}
 		
 	}
-	
+	return header_findings
 }
