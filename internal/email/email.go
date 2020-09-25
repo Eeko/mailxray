@@ -1,3 +1,5 @@
+// package for handling full email objects.
+
 package email
 
 import (

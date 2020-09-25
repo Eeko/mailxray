@@ -1,3 +1,5 @@
+// file to store finding data structs
+
 package finding
 
 // Defines a generic Finding type
