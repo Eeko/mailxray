@@ -3,60 +3,61 @@
 package headers
 
 import (
+	"encoding/json"
 	"testing"
 	"time"
-	"encoding/json"
+
 	"../finding"
 )
 
 // tests whether we get the desired error if the message date is set to future
 func TestDateInFuture(t *testing.T) {
-	time_now := time.Now()
-	one_week_in_future := time_now.Add(time.Hour * 24 * 7)
-	formatted_date := one_week_in_future.Format(time.RFC1123Z)
-	
+	timeNow := time.Now()
+	oneWeekInFuture := timeNow.Add(time.Hour * 24 * 7)
+	formattedDate := oneWeekInFuture.Format(time.RFC1123Z)
+
 	want := finding.Finding{
-		Message: "Parsed Date is after current date", 
-		Location: [2]int{0, len(formatted_date)}, 
+		Message:  "Parsed Date is after current date",
+		Location: [2]int{0, len(formattedDate)},
 		Severity: 4,
 	}
 
-	test_result := ProcessDate("Date", formatted_date)
+	testResult := ProcessDate("Date", formattedDate)
 	matches := false
-	for _, item := range test_result {
+	for _, item := range testResult {
 		if item == want {
 			matches = true
 		}
 	}
-	result_json, _ := json.Marshal(test_result)
-	want_json, _ := json.Marshal(want)
+	resultJSON, _ := json.Marshal(testResult)
+	wantJSON, _ := json.Marshal(want)
 	if matches == false {
-		t.Errorf("Got: %v, Wanted %v", string(result_json), string(want_json) )
+		t.Errorf("Got: %v, Wanted %v", string(resultJSON), string(wantJSON))
 	}
 }
 
 // tests whether we get the desired error if the message date is set far back enough in the past
 func TestDateInDistantPast(t *testing.T) {
-	time_now := time.Now()
-	ten_years_in_past := time_now.Add(-time.Hour * 24 * 365 * 15)
-	formatted_date := ten_years_in_past.Format(time.RFC1123Z)
-	
+	timeNow := time.Now()
+	tenYearsInPast := timeNow.Add(-time.Hour * 24 * 365 * 15)
+	formattedDate := tenYearsInPast.Format(time.RFC1123Z)
+
 	want := finding.Finding{
-		Message: "Parsed Date is over 10 years in the past", 
-		Location: [2]int{0, len(formatted_date)}, 
+		Message:  "Parsed Date is over 10 years in the past",
+		Location: [2]int{0, len(formattedDate)},
 		Severity: 2,
 	}
 
-	test_result := ProcessDate("Date", formatted_date)
+	testResult := ProcessDate("Date", formattedDate)
 	matches := false
-	for _, item := range test_result {
+	for _, item := range testResult {
 		if item == want {
 			matches = true
 		}
 	}
-	result_json, _ := json.Marshal(test_result)
-	want_json, _ := json.Marshal(want)
+	resultJSON, _ := json.Marshal(testResult)
+	wantJSON, _ := json.Marshal(want)
 	if matches == false {
-		t.Errorf("Got: %v, Wanted %v", string(result_json), string(want_json) )
+		t.Errorf("Got: %v, Wanted %v", string(resultJSON), string(wantJSON))
 	}
 }

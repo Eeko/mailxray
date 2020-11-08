@@ -1,5 +1,5 @@
 // tester function for rdap analyzer
-package analyzers
+package integrations
 
 import (
 	"strings"

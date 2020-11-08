@@ -1,8 +1,6 @@
-package analyzers
+package integrations
 
 import (
-	"fmt"
-
 	"github.com/openrdap/rdap"
 )
 
@@ -15,9 +13,11 @@ func RdapDomain(domain string) *rdap.Domain {
 	}
 	client := &rdap.Client{}
 	resp, _ := client.Do(req)
-	rdapDomain, ok := resp.Object.(*rdap.Domain)
+	rdapDomain, _ := resp.Object.(*rdap.Domain)
+	/**
 	if ok {
 		fmt.Printf("Handle=%s Domain=%s\n", rdapDomain.Handle, rdapDomain.LDHName)
 	}
+	**/
 	return rdapDomain
 }
