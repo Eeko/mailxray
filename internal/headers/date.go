@@ -8,7 +8,7 @@ import (
 )
 
 // ProcessDate contains tests on the date header. Returns an array of findings.
-func ProcessDate(header, value string) []finding.Finding {
+func ProcessDate(value string) []finding.Finding {
 	currentTime := time.Now()
 	var findings []finding.Finding
 	parsedDate, err := mail.ParseDate(value)

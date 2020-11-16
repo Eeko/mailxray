@@ -18,7 +18,7 @@ func ProcessHeaders(headers mail.Header) []finding.HeaderFindings {
 		var findings []finding.Finding
 		switch strings.ToLower(header) {
 		case "date":
-			findings = ProcessDate(header, value[0])
+			findings = ProcessDate(value[0])
 			headerFindings = append(headerFindings, finding.HeaderFindings{
 				HeaderName: "date",
 				Findings:   findings,

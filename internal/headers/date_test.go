@@ -22,7 +22,7 @@ func TestDateInFuture(t *testing.T) {
 		Severity: 4,
 	}
 
-	testResult := ProcessDate("Date", formattedDate)
+	testResult := ProcessDate(formattedDate)
 	matches := false
 	for _, item := range testResult {
 		if item == want {
@@ -48,7 +48,7 @@ func TestDateInDistantPast(t *testing.T) {
 		Severity: 2,
 	}
 
-	testResult := ProcessDate("Date", formattedDate)
+	testResult := ProcessDate(formattedDate)
 	matches := false
 	for _, item := range testResult {
 		if item == want {
